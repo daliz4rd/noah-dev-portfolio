@@ -104,3 +104,12 @@ nav.main-nav ul li ul.dropdown {
 .step-img{
   margin-top:5%;
 }
+/* Text logo (replaces images/logo.svg) */
+.logo-text {
+  display: block;
+  font-family: 'HK Grotesk', sans-serif;
+  font-weight: bold;
+  font-size: 56px;
+  line-height: 1;
+  color: #ffffff;
+}
