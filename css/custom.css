@@ -1,0 +1,106 @@
+img.logo {
+  max-height: 80px;
+  display: block;
+}
+a.top{
+  padding-top: 20px;
+}
+header#main-header a.nav-link {
+  text-decoration: none;
+  display: block;
+  line-height: 1.1;
+  position: relative;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 3;
+  padding:4px;
+}
+
+footer.footer {
+  background-color: #110934;
+}
+
+p.project-subheader {
+  font-size: 32px;
+  color: #ffffff;
+}
+
+p.client {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.video-frame {
+  position: relative;
+  height: 0;
+}
+
+.content-block,
+.list-block {
+  margin-bottom: 24px;
+}
+
+h3.stripe:before {
+  content: '';
+  margin-bottom: 24px;
+  width: 40px;
+  height: 8px;
+  background: #95ff9e;
+  display: block;
+}
+
+h6 {
+  display: block;
+  font-size: 0.67em;
+  margin-block-start: .6em;
+  margin-block-end: .6em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+h6.dropdown-header {
+  color: #95ff9e;
+  display: block;
+  font-size: 0.67em;
+  margin-block-start: .6em;
+  margin-block-end: .6em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+hr.dropdown-divider{
+  display: block;
+  font-size: 0.67em;
+  margin-block-start: .6em;
+  margin-block-end: .6em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.steps {
+  color: #ffffff;
+}
+
+.step{
+  margin-top:24px;
+  margin-bottom:24px;
+}
+
+nav.main-nav ul li ul.dropdown {
+    position: absolute;
+    max-height: 0;
+    opacity: 0;
+    min-width: 250px;
+    margin-top: -8px;
+    padding-top: 8px;
+    overflow: hidden;
+    transform: translateY(-30px);
+    transition: transform .3s, opacity .3s, max-height 0s .3s;
+}
+
+.step-img{
+  margin-top:5%;
+}

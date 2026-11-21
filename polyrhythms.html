@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Liz Gerrity | Polyrhythms</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  <meta name="format-detection" content="telephone=no">
+  <!-- <link rel="stylesheet" type="text/css" href="polyrhythms/css/base.css"> -->
+  <link rel="stylesheet" type="text/css" href="css/core.css">
+  <link rel="stylesheet" type="text/css" href="css/animsition.min.css">
+  <link rel="stylesheet" type="text/css" href="css/elements.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
+  <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+  <div id="wrapper" class="animsition">
+    <div id="loader" class="fh">
+      <section class="vcenter">
+        <div class="container">
+          <div class="indicator"> <span class="number">00</span><span class="unit">%</span>
+            <div class="loadbar">
+              <div class="inner"></div>
+            </div>
+          </div>
+          <div class="img-count"><span class="loaded"></span><span class="description">images loaded</span></div>
+        </div>
+      </section>
+    </div>
+    <header id="main-header">
+      <div class="container">
+        <div class="grid">
+          <nav class="main-nav">
+            <div class="responsive-nav">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+            <ul class="nav-links">
+              <li class="col-1 brand"><a href="index.html"><img alt="lg" src="images/logo.svg" class="logo"></a></li>
+              <li class="col-1 has-dropdown"><a href="index.html" class="active nav-link undefined">Work</a>
+                <ul class="dropdown">
+                  <li>
+                    <h6 class="dropdown-header">CASE STUDIES</h6>
+                  </li>
+                  <li><a href="projects.html" class="nav-link undefined">View Case Studies</a></li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <h6 class="dropdown-header">SEE MORE</h6>
+                  </li>
+                  <li><a href="gallery.html" class="nav-link undefined">Image Gallery</a></li>
+                </ul>
+              </li>
+              <li class="col-1 col-offset-1"><a href="services.html" class="nav-link undefined">Services</a></li>
+              <li class="col-1 col-offset-1"><a href="about.html" class="nav-link undefined">About</a></li>
+              <li class="col-1 col-offset-1"><a href="contact.html" class="nav-link undefined">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <div id="inner">
+      <section class="nmb behind-header">
+        <div class="hero">
+          <div style="background-image: url(polyrhythms-files/images/polyr-hero.png);background-color: rgba(0, 0, 0, 0.75); background-blend-mode: multiply;" class="bg faded"></div>
+          <div class="vcenter">
+            <div class="container mb-xl">
+              <div class="grid">
+                <div class="col-1">2025</div>
+                <div class="col-7">
+                  <div class="label">Javascript</div>
+                  <h1 class="animatedText">Polyrhythms</h1>
+                  <h2 class="animatedText">Click for sound.</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mb-xl">
+        <div class="container">
+          <div class="grid content">
+            <div class = "col-8" id="canvas" class="polyrhythmsCanvas">
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <canvas id="myCanvas" style="background-color:black"></canvas>
+              </div>
+              <script src="polyrhythms-files/sound.js"></script>
+              <script src="polyrhythms-files/track.js"></script>
+              <script src="polyrhythms-files/ball.js"></script>
+              <!----------------------CANVAS ---------------------->
+              <script>
+                const size = 700;
+                myCanvas.width = size;
+                myCanvas.height = size / 2;
+
+                // set the track to the middle of the screen
+                const trackCenter = { x: size / 2, y: size / 2 };
+                const trackMinRadius = 60;
+                const trackStep = 15;
+                const ballRadius = 6;
+                const ballMinSpeed = 0.01;
+                const ballSpeedStep = -0.0001;
+
+                const soundFrequencies = [
+                  1760, 1567.98, 1396.91, 1318.51, 1174.66, 1046.5, 987.77, 880,
+                  783.99, 698.46, 659.25, 587.33, 523.25, 493.88, 440, 392, 349.23,
+                  329.63, 293.66, 261.63
+                ];
+
+                tracks = [];
+                balls = [];
+                //if we want 20 pairs of tracks and balls
+                const N = 20;
+                // loop from 0 all the way to N
+                for (let i = 0; i < N; i++) {
+                  const trackRadius = trackMinRadius + i * trackStep;
+                  const ballSpeed = ballMinSpeed + i * ballSpeedStep;
+                  const ballSoundFrequency = soundFrequencies[i];
+                  const hue = (i * 360) / N;
+                  const track = new Track(trackCenter, trackRadius, hue);
+                  const ball = new Ball(track, ballRadius, ballSpeed, ballSoundFrequency, hue);
+                  tracks.push(track);
+                  balls.push(ball);
+                }
+
+                const ctx = myCanvas.getContext("2d");
+
+                animate();
+
+                function animate() {
+                  //clear the canvas
+                  ctx.clearRect(0, 0, size, size)
+                  // redraw the track and ball on each frame
+                  tracks.forEach((track) => track.draw(ctx));
+                  balls.forEach((ball) => ball.move());
+                  balls.forEach((ball) => ball.draw(ctx));
+                  requestAnimationFrame(animate);
+                }
+              </script>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mb-xl">
+        <div class="container">
+          <div class="grid content overview">
+            <div class="col-offset-1 col-3">
+              <div class="project-data">
+                <div class="title">Description</div>
+                <p class="project-subheader">Polyrhythms is an interactive audio-visual experience created using JavaScript.</p>
+              </div>
+            </div>
+            <div class="col-offset-1 col-1">
+              <div class="project-data">
+                <div class="title">Instructor</div>
+                <div class="desc">@Radu</div>
+              </div>
+              <div class="project-data">
+                <div class="title">Type</div>
+                <div class="desc">Javascript</div>
+              </div>
+            </div>
+            <div class="col-1">
+              <div class="project-data">
+                <div class="title">Year</div>
+                <div class="desc">2024</div>
+              </div>
+              <div class="project-data">
+                <div class="title">Languages</div>
+                <div class="desc">HTML, CSS, Javascript</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mb-xl performance">
+        <div class="container">
+          <ul class="accordion">
+            <li class="active">
+              <div class="head">
+                <div class="title">Description</div>
+              </div>
+              <div class="body">
+                <p class="stats"> Polyrhythms visualises and sonifies up to 20 simultaneous polyrhythms. This project generates a series of concentric circles, each representing a unique rhythmic pattern. As the circles rotate, they emit sounds at specific intervals, creating a complex and evolving soundscape. Mathematical calculations determine the speed and position of each circle, resulting in intricate visual and auditory patterns.</p>
+              </div>
+            </li>
+            <li>
+              <div class="head">
+                <div class="title">Concepts</div>
+              </div>
+              <div class="body">
+                <div class="grid">
+                  <div class="col-2"><span class="label">Languages</span>
+                    <ul class="striped inside">
+                      <li>Javascript</li>
+                      <li>CSS</li>
+                      <li>HTML</li>
+
+                    </ul>
+                  </div>
+                  <div class="col-2"><span class="label">Programming Concepts</span>
+                    <ul class="striped inside">
+                      <li>Code maintainability</li>
+                      <li>Reduction of complexity</li>
+                      <li>Problem solving with built-in Javascript functions</li>
+
+                    </ul>
+                  </div>
+                  <div class="col-2"><span class="label">Mathematical Concepts</span>
+                    <ul class="striped inside">
+                      <li>Circular motion</li>
+                      <li>Phase relationships</li>
+                      <li>Frequency</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="prev-next-container mb-xl">
+        <div class="container">
+          <div class="grid content">
+            <div class="col-4">
+              <div class="vcenter link-container"><a href="oberlin-college.html" class="prev-link">
+                  <div class="project-title">Oberlin College</div>
+                  <div class="link-title">Previous project</div>
+                </a></div>
+            </div>
+            <div class="col-4">
+              <div class="vcenter link-container text-right"><a href="andriotis.html" class="next-link">
+                  <div class="project-title">Andriotis Law</div>
+                  <div class="link-title">Next project</div>
+                </a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer class="footer">
+      <div class="container"><span>Liz Gerrity | Visual Design + Illustration &copy; 2021</span></div>
+    </footer>
+  </div>
+  <script src="js/vendor.js"></script>
+  <script src="modules/titan-slider/titan-slider.js"></script>
+  <script src="modules/tera-lightbox/tera-lightbox.js"></script>
+  <script src="js/functions.js"></script>
+  <script>
+    $('#img-carousel').titanSlider({
+      carousel: true,
+      autoplay: true
+    });
+  </script>
+</body>
+
+</html>
