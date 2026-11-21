@@ -73,7 +73,11 @@
           <ul class="slides">
             <li class="slide dark">
               <div class="hero fs">
-                <div style="background-image: url(images/hero/polyrhythms.gif);background-color: rgba(0, 0, 0, 0.75); background-blend-mode: multiply;" class="bg faded"></div>
+                <video class="bg bg-video faded" autoplay muted loop playsinline preload="auto"
+                  poster="images/hero/polyrhythms-poster.jpg" aria-hidden="true">
+                  <source src="images/hero/polyrhythms.webm" type="video/webm">
+                  <source src="images/hero/polyrhythms.mp4" type="video/mp4">
+                </video>
                 <div class="vcenter">
                   <div class="container">
                     <div class="grid">
@@ -235,6 +239,14 @@
   <script src="js/functions.js"></script>
   <script>
     $('#home-slider').titanSlider();
+
+    // Respect the "reduce motion" OS setting: show the still poster instead of the looping video
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.bg-video').forEach(function (video) {
+        video.removeAttribute('autoplay');
+        video.pause();
+      });
+    }
   </script>
 </body>
 
